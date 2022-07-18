@@ -1,3 +1,4 @@
+import { enumUtil } from "./helpers/enumUtil.ts";
 import { errorUtil } from "./helpers/errorUtil.ts";
 import {
   addIssueToContext,
@@ -116,11 +117,10 @@ function processCreateParams(params: RawCreateParams): ProcessedCreateParams {
   if (errorMap) return { errorMap: errorMap, description };
   const customMap: ZodErrorMap = (iss, ctx) => {
     if (iss.code !== "invalid_type") return { message: ctx.defaultError };
-    if (typeof ctx.data === "undefined" && required_error)
-      return { message: required_error };
-    if (params.invalid_type_error)
-      return { message: params.invalid_type_error };
-    return { message: ctx.defaultError };
+    if (typeof ctx.data === "undefined") {
+      return { message: required_error ?? ctx.defaultError };
+    }
+    return { message: invalid_type_error ?? ctx.defaultError };
   };
   return { errorMap: customMap, description };
 }
@@ -1930,6 +1930,12 @@ export class ZodObject<
       ...this._def,
       shape: () => newShape,
     }) as any;
+  }
+
+  keyof(): ZodEnum<enumUtil.UnionToTupleString<keyof T>> {
+    return createZodEnum(
+      util.objectKeys(this.shape) as [string, ...string[]]
+    ) as any;
   }
 
   static create = <T extends ZodRawShape>(

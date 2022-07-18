@@ -63,6 +63,7 @@
 - [Nullables](#nullables)
 - [Objects](#objects)
   - [.shape](#shape)
+  - [.enum](#enum)
   - [.extend](#extend)
   - [.merge](#merge)
   - [.pick/.omit](#pickomit)
@@ -780,6 +781,15 @@ Use `.shape` to access the schemas for a particular key.
 ```ts
 Dog.shape.name; // => string schema
 Dog.shape.age; // => number schema
+```
+
+### `.keyof`
+
+Use `.key` to create a `ZodEnum` schema from the keys of an object schema.
+
+```ts
+const keySchema = Dog.keyof();
+keySchema; // ZodEnum<["name", "age"]>
 ```
 
 ### `.extend`
@@ -1790,7 +1800,7 @@ z.optional(z.string());
 
 ### `.nullable`
 
-A convenience method that returns an nullable version of a schema.
+A convenience method that returns a nullable version of a schema.
 
 ```ts
 const nullableString = z.string().nullable(); // string | null
