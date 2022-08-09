@@ -420,6 +420,14 @@ export abstract class ZodType<
     }) as any;
   }
 
+  brand<B extends string | number | symbol>(): ZodBranded<this, B> {
+    return new ZodBranded({
+      typeName: ZodFirstPartyTypeKind.ZodBranded,
+      type: this,
+      ...processCreateParams(undefined),
+    });
+  }
+
   describe(description: string): this {
     const This = (this as any).constructor;
     return new This({
@@ -1637,9 +1645,6 @@ export class ZodObject<
   Output = objectOutputType<T, Catchall>,
   Input = objectInputType<T, Catchall>
 > extends ZodType<Output, ZodObjectDef<T, UnknownKeys, Catchall>, Input> {
-  readonly _shape!: T;
-  readonly _unknownKeys!: UnknownKeys;
-  readonly _catchall!: Catchall;
   private _cached: { shape: T; keys: string[] } | null = null;
 
   _getCached(): { shape: T; keys: string[] } {
@@ -1813,7 +1818,11 @@ export class ZodObject<
   merge<Incoming extends AnyZodObject>(
     merging: Incoming
   ): //ZodObject<T & Incoming["_shape"], UnknownKeys, Catchall> = (merging) => {
-  ZodObject<extendShape<T, Incoming["_shape"]>, UnknownKeys, Catchall> {
+  ZodObject<
+    extendShape<T, ReturnType<Incoming["_def"]["shape"]>>,
+    UnknownKeys,
+    Catchall
+  > {
     // const mergedShape = objectUtil.mergeShapes(
     //   this._def.shape(),
     //   merging._def.shape()
@@ -3681,13 +3690,13 @@ export class ZodDefault<T extends ZodTypeAny> extends ZodType<
   };
 }
 
-/////////////////////////////////////////
-/////////////////////////////////////////
-//////////                     //////////
-//////////      ZodNaN         //////////
-//////////                     //////////
-/////////////////////////////////////////
-/////////////////////////////////////////
+//////////////////////////////////////
+//////////////////////////////////////
+//////////                  //////////
+//////////      ZodNaN      //////////
+//////////                  //////////
+//////////////////////////////////////
+//////////////////////////////////////
 
 export interface ZodNaNDef extends ZodTypeDef {
   typeName: ZodFirstPartyTypeKind.ZodNaN;
@@ -3715,6 +3724,47 @@ export class ZodNaN extends ZodType<number, ZodNaNDef> {
       ...processCreateParams(params),
     });
   };
+}
+
+//////////////////////////////////////////
+//////////////////////////////////////////
+//////////                      //////////
+//////////      ZodBranded      //////////
+//////////                      //////////
+//////////////////////////////////////////
+//////////////////////////////////////////
+
+export interface ZodBrandedDef<T extends ZodTypeAny> extends ZodTypeDef {
+  type: T;
+  typeName: ZodFirstPartyTypeKind.ZodBranded;
+}
+
+export const BRAND: unique symbol = Symbol("zod_brand");
+export type BRAND<T extends string | number | symbol> = {
+  [BRAND]: { [k in T]: true };
+};
+
+export class ZodBranded<
+  T extends ZodTypeAny,
+  B extends string | number | symbol
+> extends ZodType<
+  T["_output"] & BRAND<B>,
+  ZodBrandedDef<T>,
+  T["_input"] & BRAND<B>
+> {
+  _parse(input: ParseInput): ParseReturnType<any> {
+    const { ctx } = this._processInputParams(input);
+    const data = ctx.data;
+    return this._def.type._parse({
+      data,
+      path: ctx.path,
+      parent: ctx,
+    });
+  }
+
+  unwrap() {
+    return this._def.type;
+  }
 }
 
 export const custom = <T>(
@@ -3771,6 +3821,7 @@ export enum ZodFirstPartyTypeKind {
   ZodNullable = "ZodNullable",
   ZodDefault = "ZodDefault",
   ZodPromise = "ZodPromise",
+  ZodBranded = "ZodBranded",
 }
 export type ZodFirstPartySchemaTypes =
   | ZodString
@@ -3803,7 +3854,8 @@ export type ZodFirstPartySchemaTypes =
   | ZodOptional<any>
   | ZodNullable<any>
   | ZodDefault<any>
-  | ZodPromise<any>;
+  | ZodPromise<any>
+  | ZodBranded<any, any>;
 
 const instanceOfType = <T extends new (...args: any[]) => any>(
   cls: T,

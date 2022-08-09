@@ -47,7 +47,7 @@
   - [Sponsors](#sponsors)
   - [Ecosystem](#ecosystem)
 - [Installation](#installation)
-  - [Node/npm](#Node/npm)
+  - [Node/npm](#nodenpm)
   - [Deno](#deno)
 - [Basic usage](#basic-usage)
 - [Primitives](#primitives)
@@ -90,6 +90,7 @@
 - [Instanceof](#instanceof)
 - [Function schemas](#function-schemas)
 - [Preprocess](#preprocess)
+- [Branded types](#branded-types)
 - [Schema methods](#schema-methods)
   - [.parse](#parse)
   - [.parseAsync](#parseasync)
@@ -227,7 +228,7 @@ Sponsorship at any level is appreciated and encouraged. For individual developer
       <a href="https://seasoned.cc">seasoned.cc</a>
     </td>
     <td align="center">
-      <a href="https://seasoned.cc">
+      <a href="https://interval.com">
         <img src="https://avatars.githubusercontent.com/u/67802063?s=200&v=4" width="150px;" alt="" />
       </a>
       <br />
@@ -284,6 +285,17 @@ Sponsorship at any level is appreciated and encouraged. For individual developer
       <a href="https://adaptable.io/">adaptable.io</a>
       <br />
     </td>
+    <td align="center">
+      <a href="https://www.avanawallet.com/">
+        <img src="https://avatars.githubusercontent.com/u/105452197?s=200&v=4" width="100px;" alt="Avana Wallet logo"/>
+      </a>
+      <br />
+      <b>Avana Wallet</b>
+      <br/>
+      <a href="https://www.avanawallet.com/">avanawallet.com</a><br/>
+      <span>Solana non-custodial wallet</span>
+      <br />
+    </td>
   </tr>
 </table>
 
@@ -316,6 +328,8 @@ There are a growing number of tools that are built atop or support Zod natively!
 - [`nestjs-graphql-zod`](https://github.com/incetarik/nestjs-graphql-zod): Generates NestJS GraphQL model classes from Zod schemas dynamically and provides GraphQL method decorators working with Zod schemas.
 - [`zod-xlsx`](https://github.com/sidwebworks/zod-xlsx): A xlsx based resource validator using Zod schemas.
 - [`remix-domains`](https://github.com/SeasonedSoftware/remix-domains/): Improves end-to-end type safety in [Remix](https://remix.run/) by leveraging Zod to parse the framework's inputs such as FormData, URLSearchParams, etc.
+- [`@zodios/core`](https://github.com/ecyrbe/zodios): A typescript API client with runtime and compile time validation backed by axios and zod.
+- [`@runtyping/zod`](https://github.com/johngeorgewright/runtyping/tree/master/packages/zod): Generate zod from static types & JSON schema.
 
 #### Form integrations
 
@@ -576,7 +590,7 @@ z.date().max(new Date(), { message: "Too young!" });
 
 **Supporting date strings**
 
-To write a schema that accepts either a `Date` or a date string, use (`z.preprocess`)[#preprocess].
+To write a schema that accepts either a `Date` or a date string, use [`z.preprocess`](#preprocess).
 
 ```ts
 const dateSchema = z.preprocess((arg) => {
@@ -1452,7 +1466,7 @@ All Zod schemas contain certain methods.
 
 ### `.parse`
 
-`.parse(data:unknown): T`
+`.parse(data: unknown): T`
 
 Given any Zod schema, you can call its `.parse` method to check `data` is valid. If it is, a value is returned with full type information! Otherwise, an error is thrown.
 
@@ -1863,6 +1877,47 @@ z.object({ name: z.string() }).and(z.object({ age: z.number() })); // { name: st
 // equivalent to
 z.intersection(z.object({ name: z.string() }), z.object({ age: z.number() }));
 ```
+
+### `.brand`
+
+`.brand<T>() => ZodBranded<this, B>`
+
+TypeScript's type system is structural, which means that any two types that are structurally equivalent are considered the same.
+
+```ts
+type Cat = { name: string };
+type Dog = { name: string };
+
+const petCat = (cat: Cat) => {};
+const fido: Dog = { name: "fido" };
+petCat(fido); // works fine
+```
+
+In some cases, its can be desirable to simulate _nominal typing_ inside TypeScript. For instance, you may wish to write a function that only accepts an input that has been validated by Zod. This can be achieved with _branded types_ (AKA _opaque types_).
+
+```ts
+const Cat = z.object({ name: z.string }).brand<"Cat">();
+type Cat = z.infer<typeof Cat>;
+
+const petCat = (cat: Cat) => {};
+
+// this works
+const simba = Cat.parse({ name: "simba" });
+petCat(simba);
+
+// this doesn't
+petCat({ name: "fido" });
+```
+
+Under the hood, this works by attaching a "brand" to the inferred type using an intersection type. This way, plain/unbranded data structures are no longer assignable to the inferred type of the schema.
+
+```ts
+const Cat = z.object({ name: z.string }).brand<"Cat">();
+type Cat = z.infer<typeof Cat>;
+// {name: string} & {[symbol]: "Cat"}
+```
+
+Note that branded types do not affect the runtime result of `.parse`. It is a static-only construct.
 
 ## Guides and concepts
 
