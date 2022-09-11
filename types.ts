@@ -268,7 +268,7 @@ export abstract class ZodType<
   refine<RefinedOutput extends Output>(
     check: (arg: Output) => arg is RefinedOutput,
     message?: string | CustomErrorParams | ((arg: Output) => CustomErrorParams)
-  ): ZodEffects<this, RefinedOutput, RefinedOutput>;
+  ): ZodEffects<this, RefinedOutput, Input>;
   refine(
     check: (arg: Output) => unknown | Promise<unknown>,
     message?: string | CustomErrorParams | ((arg: Output) => CustomErrorParams)
@@ -315,7 +315,7 @@ export abstract class ZodType<
   refinement<RefinedOutput extends Output>(
     check: (arg: Output) => arg is RefinedOutput,
     refinementData: IssueData | ((arg: Output, ctx: RefinementCtx) => IssueData)
-  ): ZodEffects<this, RefinedOutput, RefinedOutput>;
+  ): ZodEffects<this, RefinedOutput, Input>;
   refinement(
     check: (arg: Output) => boolean,
     refinementData: IssueData | ((arg: Output, ctx: RefinementCtx) => IssueData)
@@ -1669,9 +1669,17 @@ export class ZodObject<
 
     const { shape, keys: shapeKeys } = this._getCached();
     const extraKeys: string[] = [];
-    for (const key in ctx.data) {
-      if (!shapeKeys.includes(key)) {
-        extraKeys.push(key);
+
+    if (
+      !(
+        this._def.catchall instanceof ZodNever &&
+        this._def.unknownKeys === "strip"
+      )
+    ) {
+      for (const key in ctx.data) {
+        if (!shapeKeys.includes(key)) {
+          extraKeys.push(key);
+        }
       }
     }
 
@@ -3557,7 +3565,7 @@ export class ZodEffects<
     preprocess: (arg: unknown) => unknown,
     schema: I,
     params?: RawCreateParams
-  ): ZodEffects<I, I["_output"]> => {
+  ): ZodEffects<I, I["_output"], unknown> => {
     return new ZodEffects({
       schema,
       effect: { type: "preprocess", transform: preprocess },
