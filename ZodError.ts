@@ -31,6 +31,7 @@ export const ZodIssueCode = util.arrayToEnum([
   "too_big",
   "invalid_intersection_types",
   "not_multiple_of",
+  "not_finite",
 ]);
 
 export type ZodIssueCode = keyof typeof ZodIssueCode;
@@ -92,6 +93,7 @@ export type StringValidation =
   | "uuid"
   | "regex"
   | "cuid"
+  | "datetime"
   | { startsWith: string }
   | { endsWith: string };
 
@@ -104,6 +106,7 @@ export interface ZodTooSmallIssue extends ZodIssueBase {
   code: typeof ZodIssueCode.too_small;
   minimum: number;
   inclusive: boolean;
+  exact?: boolean;
   type: "array" | "string" | "number" | "set" | "date";
 }
 
@@ -111,6 +114,7 @@ export interface ZodTooBigIssue extends ZodIssueBase {
   code: typeof ZodIssueCode.too_big;
   maximum: number;
   inclusive: boolean;
+  exact?: boolean;
   type: "array" | "string" | "number" | "set" | "date";
 }
 
@@ -121,6 +125,10 @@ export interface ZodInvalidIntersectionTypesIssue extends ZodIssueBase {
 export interface ZodNotMultipleOfIssue extends ZodIssueBase {
   code: typeof ZodIssueCode.not_multiple_of;
   multipleOf: number;
+}
+
+export interface ZodNotFiniteIssue extends ZodIssueBase {
+  code: typeof ZodIssueCode.not_finite;
 }
 
 export interface ZodCustomIssue extends ZodIssueBase {
@@ -145,9 +153,13 @@ export type ZodIssueOptionalMessage =
   | ZodTooBigIssue
   | ZodInvalidIntersectionTypesIssue
   | ZodNotMultipleOfIssue
+  | ZodNotFiniteIssue
   | ZodCustomIssue;
 
-export type ZodIssue = ZodIssueOptionalMessage & { message: string };
+export type ZodIssue = ZodIssueOptionalMessage & {
+  fatal?: boolean;
+  message: string;
+};
 
 export const quotelessJson = (obj: any) => {
   const json = JSON.stringify(obj, null, 2);
@@ -156,12 +168,12 @@ export const quotelessJson = (obj: any) => {
 
 export type ZodFormattedError<T, U = string> = {
   _errors: U[];
-} & (T extends [any, ...any[]]
-  ? { [K in keyof T]?: ZodFormattedError<T[K]> }
-  : T extends any[]
-  ? { [k: number]: ZodFormattedError<T[number]> }
-  : T extends object
-  ? { [K in keyof T]?: ZodFormattedError<T[K]> }
+} & (NonNullable<T> extends [any, ...any[]]
+  ? { [K in keyof NonNullable<T>]?: ZodFormattedError<NonNullable<T>[K]> }
+  : NonNullable<T> extends any[]
+  ? { [k: number]: ZodFormattedError<NonNullable<T>[number]> }
+  : NonNullable<T> extends object
+  ? { [K in keyof NonNullable<T>]?: ZodFormattedError<NonNullable<T>[K]> }
   : unknown);
 
 export type inferFormattedError<
@@ -296,7 +308,6 @@ export type IssueData = stripPath<ZodIssueOptionalMessage> & {
   path?: (string | number)[];
   fatal?: boolean;
 };
-export type MakeErrorData = IssueData;
 
 export type ErrorMapCtx = {
   defaultError: string;
