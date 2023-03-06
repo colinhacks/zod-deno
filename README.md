@@ -118,6 +118,7 @@
   - [.or](#or)
   - [.and](#and)
   - [.brand](#brand)
+  - [.pipe](#pipe)
 - [Guides and concepts](#guides-and-concepts)
   - [Type inference](#type-inference)
   - [Writing generic functions](#writing-generic-functions)
@@ -204,6 +205,26 @@ Sponsorship at any level is appreciated and encouraged. For individual developer
       <br />
       <a href="https://proxy.com">proxy.com</a>
     </td>
+  </tr>
+    <tr>
+    <td align="center">
+      <a href="https://trigger.dev/">
+        <img src="https://avatars.githubusercontent.com/u/95297378?s=200&v=4" width="200px;" alt="Trigger.dev logo" />
+      </a>
+      <br />
+      <b>Trigger.dev</b>
+      <br />
+      <a href="https://trigger.dev">trigger.dev</a>
+    </td>
+    <!-- <td align="center">
+      <a href="https://proxy.com/">
+        <img src="https://avatars.githubusercontent.com/u/14321439?s=200&v=4" width="200px;" alt="Proxy logo" />
+      </a>
+      <br />
+      <b>Proxy</b>
+      <br />
+      <a href="https://proxy.com">proxy.com</a>
+    </td> -->
   </tr>
 </table>
 
@@ -308,7 +329,7 @@ Sponsorship at any level is appreciated and encouraged. For individual developer
     </td>
   </tr>
   <tr>
-  <td align="center">
+    <td align="center">
       <a href="https://fungible.systems/">
         <img src="https://avatars.githubusercontent.com/u/80220121?s=200&v=4" width="100px;" alt="Fungible Systems logo"/>
       </a>
@@ -339,6 +360,39 @@ Sponsorship at any level is appreciated and encouraged. For individual developer
       <span>Solana non-custodial wallet</span>
       <br />
     </td>
+  </tr>
+  <tr>
+  <td align="center">
+      <a href="https://learnwithjason.dev">
+        <img src="https://avatars.githubusercontent.com/u/66575486?s=200&v=4" width="100px;" alt="Learn with Jason logo"/>
+      </a>
+      <br />
+      <b>Jason Lengstorf</b>
+      <br/>
+      <a href="https://learnwithjason.dev/">learnwithjason.dev</a>
+      <br />
+    </td>
+    <td align="center">
+      <a href="https://ill.inc/">
+        <img src="https://avatars.githubusercontent.com/u/89107581?s=200&v=4" width="100px;" alt="Global Illumination"/>
+      </a>
+      <br />
+      <b>Global Illumination, Inc.</b>
+      <br/>
+      <a href="https://ill.inc/">ill.inc</a>
+      <br />
+    </td>
+    <!-- <td align="center">
+      <a href="https://www.avanawallet.com/">
+        <img src="https://avatars.githubusercontent.com/u/105452197?s=200&v=4" width="100px;" alt="Avana Wallet logo"/>
+      </a>
+      <br />
+      <b>Avana Wallet</b>
+      <br/>
+      <a href="https://www.avanawallet.com/">avanawallet.com</a><br/>
+      <span>Solana non-custodial wallet</span>
+      <br />
+    </td> -->
   </tr>
 </table>
 
@@ -586,6 +640,7 @@ tuna.value; // "tuna"
 Zod includes a handful of string-specific validations.
 
 ```ts
+// validations
 z.string().max(5);
 z.string().min(5);
 z.string().length(5);
@@ -595,16 +650,19 @@ z.string().emoji();
 z.string().uuid();
 z.string().cuid();
 z.string().cuid2();
+z.string().ulid();
 z.string().regex(regex);
+z.string().includes(string);
 z.string().startsWith(string);
 z.string().endsWith(string);
-z.string().trim(); // trim whitespace
 z.string().datetime(); // defaults to UTC, see below for options
 z.string().ip(); // defaults to IPv4 and IPv6, see below for options
-```
 
-<!-- z.string().toLowerCase(); // toLowerCase -->
-<!-- z.string().toUpperCase(); // toUpperCase -->
+// transformations
+z.string().trim(); // trim whitespace
+z.string().toLowerCase(); // toLowerCase
+z.string().toUpperCase(); // toUpperCase
+```
 
 > Check out [validator.js](https://github.com/validatorjs/validator.js) for a bunch of other useful string validation functions that can be used in conjunction with [Refinements](#refine).
 
@@ -627,13 +685,14 @@ z.string().email({ message: "Invalid email address" });
 z.string().url({ message: "Invalid url" });
 z.string().emoji({ message: "Contains non-emoji characters" });
 z.string().uuid({ message: "Invalid UUID" });
+z.string().includes("tuna", { message: "Must include tuna" });
 z.string().startsWith("https://", { message: "Must provide secure URL" });
 z.string().endsWith(".com", { message: "Only .com domains allowed" });
 z.string().datetime({ message: "Invalid datetime string! Must be UTC." });
 z.string().ip({ message: "Invalid IP address" });
 ```
 
-### Datetime validation
+### ISO datetimes
 
 The `z.string().datetime()` method defaults to UTC validation: no timezone offsets with arbitrary sub-second decimal precision.
 
@@ -668,7 +727,7 @@ datetime.parse("2020-01-01T00:00:00Z"); // fail
 datetime.parse("2020-01-01T00:00:00.123456Z"); // fail
 ```
 
-### IP address validation
+### IP addresses
 
 The `z.string().ip()` method by default validate IPv4 and IPv6.
 
@@ -1759,9 +1818,14 @@ This returns a `ZodEffects` instance. `ZodEffects` is a wrapper class that conta
 You can create a Zod schema for any TypeScript type by using `z.custom()`. This is useful for creating schemas for types that are not supported by Zod out of the box, such as template string literals.
 
 ```ts
-const px = z.custom<`${number}px`>((val) => /^\d+px$/.test(val as string));
-px.parse("100px"); // pass
-px.parse("100vw"); // fail
+const px = z.custom<`${number}px`>((val) => {
+  return /^\d+px$/.test(val as string);
+});
+
+type px = z.infer<typeof px>; // `${number}px`
+
+px.parse("42px"); // "42px"
+px.parse("42vw"); // throws;
 ```
 
 If you don't provide a validation function, Zod will allow any value. This can be dangerous!
@@ -2317,6 +2381,18 @@ type Cat = z.infer<typeof Cat>;
 ```
 
 Note that branded types do not affect the runtime result of `.parse`. It is a static-only construct.
+
+### `.pipe()`
+
+Schemas can be chained into validation "pipelines". It's useful for easily validating the result after a `.transform()`:
+
+```ts
+z.string()
+  .transform((val) => val.length)
+  .pipe(z.number().min(5));
+```
+
+The `.pipe()` method returns a `ZodPipeline` instance.
 
 ## Guides and concepts
 
