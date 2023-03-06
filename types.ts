@@ -464,7 +464,9 @@ export abstract class ZodType<
   }
 
   catch(def: Output): ZodCatch<this>;
-  catch(def: (ctx: { error: ZodError }) => Output): ZodCatch<this>;
+  catch(
+    def: (ctx: { error: ZodError; input: Input }) => Output
+  ): ZodCatch<this>;
   catch(def: any) {
     const catchValueFunc = typeof def === "function" ? def : () => def;
 
@@ -2131,44 +2133,42 @@ export type mergeTypes<A, B> = {
     : never;
 };
 
-export type baseObjectOutputType<Shape extends ZodRawShape> =
-  objectUtil.flatten<
-    objectUtil.addQuestionMarks<{
-      [k in keyof Shape]: Shape[k]["_output"];
-    }>
-  >;
-
 export type objectOutputType<
   Shape extends ZodRawShape,
   Catchall extends ZodTypeAny,
   UnknownKeys extends UnknownKeysParam = UnknownKeysParam
-> = (ZodTypeAny extends Catchall
-  ? baseObjectOutputType<Shape> & Passthrough<UnknownKeys>
-  : baseObjectOutputType<Shape> & {
-      [k: string]: Catchall["_output"];
-    }) &
-  Passthrough<UnknownKeys>;
+> = objectUtil.flatten<
+  objectUtil.addQuestionMarks<baseObjectOutputType<Shape>>
+> &
+  CatchallOutput<Catchall> &
+  PassthroughType<UnknownKeys>;
 
-export type baseObjectInputType<Shape extends ZodRawShape> = objectUtil.flatten<
-  objectUtil.addQuestionMarks<{
-    [k in keyof Shape]: Shape[k]["_input"];
-  }>
->;
-
-export type Passthrough<UnknownKeys extends UnknownKeysParam> =
-  UnknownKeys extends "passthrough" ? { [k: string]: unknown } : unknown;
+export type baseObjectOutputType<Shape extends ZodRawShape> = {
+  [k in keyof Shape]: Shape[k]["_output"];
+};
 
 export type objectInputType<
   Shape extends ZodRawShape,
   Catchall extends ZodTypeAny,
   UnknownKeys extends UnknownKeysParam = UnknownKeysParam
-> = ZodTypeAny extends Catchall
-  ? baseObjectInputType<Shape> & Passthrough<UnknownKeys>
-  : objectUtil.flatten<
-      baseObjectInputType<Shape> & {
-        [k: string]: Catchall["_input"];
-      } & Passthrough<UnknownKeys>
-    >;
+> = objectUtil.flatten<baseObjectInputType<Shape>> &
+  CatchallInput<Catchall> &
+  PassthroughType<UnknownKeys>;
+export type baseObjectInputType<Shape extends ZodRawShape> =
+  objectUtil.addQuestionMarks<{
+    [k in keyof Shape]: Shape[k]["_input"];
+  }>;
+
+export type CatchallOutput<T extends ZodTypeAny> = ZodTypeAny extends T
+  ? unknown
+  : { [k: string]: T["_output"] };
+
+export type CatchallInput<T extends ZodTypeAny> = ZodTypeAny extends T
+  ? unknown
+  : { [k: string]: T["_input"] };
+
+export type PassthroughType<T extends UnknownKeysParam> =
+  T extends "passthrough" ? { [k: string]: unknown } : unknown;
 
 export type deoptional<T extends ZodTypeAny> = T extends ZodOptional<infer U>
   ? deoptional<U>
@@ -4516,12 +4516,10 @@ export class ZodDefault<T extends ZodTypeAny> extends ZodType<
 //////////                      //////////
 //////////////////////////////////////////
 //////////////////////////////////////////
-export interface ZodCatchDef<
-  T extends ZodTypeAny = ZodTypeAny,
-  C extends T["_input"] = T["_input"]
-> extends ZodTypeDef {
+export interface ZodCatchDef<T extends ZodTypeAny = ZodTypeAny>
+  extends ZodTypeDef {
   innerType: T;
-  catchValue: (ctx: { error: ZodError }) => C;
+  catchValue: (ctx: { error: ZodError; input: unknown }) => T["_input"];
   typeName: ZodFirstPartyTypeKind.ZodCatch;
 }
 
@@ -4561,6 +4559,7 @@ export class ZodCatch<T extends ZodTypeAny> extends ZodType<
                   get error() {
                     return new ZodError(newCtx.common.issues);
                   },
+                  input: newCtx.data,
                 }),
         };
       });
@@ -4574,6 +4573,7 @@ export class ZodCatch<T extends ZodTypeAny> extends ZodType<
                 get error() {
                   return new ZodError(newCtx.common.issues);
                 },
+                input: newCtx.data,
               }),
       };
     }

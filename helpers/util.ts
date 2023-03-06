@@ -5,6 +5,7 @@ export namespace util {
     ? true
     : false;
 
+  export type isAny<T> = 0 extends 1 & T ? true : false;
   export const assertEqual = <A, B>(val: AssertEqual<A, B>) => val;
   export function assertIs<T>(_arg: T): void {}
   export function assertNever(_x: never): never {
@@ -99,18 +100,22 @@ export namespace objectUtil {
     [k in Exclude<keyof U, keyof V>]: U[k];
   } & V;
 
-  type optionalKeys<T extends object> = {
-    [k in keyof T]: undefined extends T[k] ? k : never;
-  }[keyof T];
+  // type optionalKeys<T extends object> = {
+  //   [k in keyof T]: undefined extends T[k] ? k : never;
+  // }[keyof T];
 
   type requiredKeys<T extends object> = {
     [k in keyof T]: undefined extends T[k] ? never : k;
   }[keyof T];
 
-  export type addQuestionMarks<T extends object> = Partial<
-    Pick<T, optionalKeys<T>>
-  > &
-    Pick<T, requiredKeys<T>>;
+  // type alkjsdf = addQuestionMarks<{ a: any }>;
+
+  export type addQuestionMarks<
+    T extends object,
+    R extends keyof T = requiredKeys<T>
+    // O extends keyof T = optionalKeys<T>
+  > = Pick<T, R> & Partial<T>;
+  //  = { [k in O]?: T[k] } & { [k in R]: T[k] };
 
   export type identity<T> = T;
   export type flatten<T> = identity<{ [k in keyof T]: T[k] }>;
