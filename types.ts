@@ -371,10 +371,10 @@ export abstract class ZodType<
     refinement: (arg: Output, ctx: RefinementCtx) => arg is RefinedOutput
   ): ZodEffects<this, RefinedOutput, Input>;
   superRefine(
-    refinement: (arg: Output, ctx: RefinementCtx) => void
+    refinement: (arg: Output, ctx: RefinementCtx) => void | Promise<void>
   ): ZodEffects<this, Output, Input>;
   superRefine(
-    refinement: (arg: Output, ctx: RefinementCtx) => unknown
+    refinement: (arg: Output, ctx: RefinementCtx) => unknown | Promise<unknown>
   ): ZodEffects<this, Output, Input> {
     return this._refinement(refinement);
   }
@@ -402,6 +402,7 @@ export abstract class ZodType<
     this.catch = this.catch.bind(this);
     this.describe = this.describe.bind(this);
     this.pipe = this.pipe.bind(this);
+    this.readonly = this.readonly.bind(this);
     this.isNullable = this.isNullable.bind(this);
     this.isOptional = this.isOptional.bind(this);
   }
@@ -489,6 +490,9 @@ export abstract class ZodType<
   pipe<T extends ZodTypeAny>(target: T): ZodPipeline<this, T> {
     return ZodPipeline.create(this, target);
   }
+  readonly(): ZodReadonly<this> {
+    return ZodReadonly.create(this);
+  }
 
   isOptional(): boolean {
     return this.safeParse(undefined).success;
@@ -541,17 +545,27 @@ export interface ZodStringDef extends ZodTypeDef {
 const cuidRegex = /^c[^\s-]{8,}$/i;
 const cuid2Regex = /^[a-z][a-z0-9]*$/;
 const ulidRegex = /[0-9A-HJKMNP-TV-Z]{26}/;
+// const uuidRegex =
+//   /^([a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[a-f0-9]{4}-[a-f0-9]{12}|00000000-0000-0000-0000-000000000000)$/i;
 const uuidRegex =
-  /^([a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[a-f0-9]{4}-[a-f0-9]{12}|00000000-0000-0000-0000-000000000000)$/i;
+  /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/i;
 // from https://stackoverflow.com/a/46181/1550155
 // old version: too slow, didn't support unicode
 // const emailRegex = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
 //old email regex
 // const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@((?!-)([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{1,})[^-<>()[\].,;:\s@"]$/i;
 // eslint-disable-next-line
-
+// const emailRegex =
+//   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[(((25[0-5])|(2[0-4][0-9])|(1[0-9]{2})|([0-9]{1,2}))\.){3}((25[0-5])|(2[0-4][0-9])|(1[0-9]{2})|([0-9]{1,2}))\])|(\[IPv6:(([a-f0-9]{1,4}:){7}|::([a-f0-9]{1,4}:){0,6}|([a-f0-9]{1,4}:){1}:([a-f0-9]{1,4}:){0,5}|([a-f0-9]{1,4}:){2}:([a-f0-9]{1,4}:){0,4}|([a-f0-9]{1,4}:){3}:([a-f0-9]{1,4}:){0,3}|([a-f0-9]{1,4}:){4}:([a-f0-9]{1,4}:){0,2}|([a-f0-9]{1,4}:){5}:([a-f0-9]{1,4}:){0,1})([a-f0-9]{1,4}|(((25[0-5])|(2[0-4][0-9])|(1[0-9]{2})|([0-9]{1,2}))\.){3}((25[0-5])|(2[0-4][0-9])|(1[0-9]{2})|([0-9]{1,2})))\])|([A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])*(\.[A-Za-z]{2,})+))$/;
+// const emailRegex =
+//   /^[a-zA-Z0-9\.\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+// const emailRegex =
+//   /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/i;
 const emailRegex =
-  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[(((25[0-5])|(2[0-4][0-9])|(1[0-9]{2})|([0-9]{1,2}))\.){3}((25[0-5])|(2[0-4][0-9])|(1[0-9]{2})|([0-9]{1,2}))\])|(\[IPv6:(([a-f0-9]{1,4}:){7}|::([a-f0-9]{1,4}:){0,6}|([a-f0-9]{1,4}:){1}:([a-f0-9]{1,4}:){0,5}|([a-f0-9]{1,4}:){2}:([a-f0-9]{1,4}:){0,4}|([a-f0-9]{1,4}:){3}:([a-f0-9]{1,4}:){0,3}|([a-f0-9]{1,4}:){4}:([a-f0-9]{1,4}:){0,2}|([a-f0-9]{1,4}:){5}:([a-f0-9]{1,4}:){0,1})([a-f0-9]{1,4}|(((25[0-5])|(2[0-4][0-9])|(1[0-9]{2})|([0-9]{1,2}))\.){3}((25[0-5])|(2[0-4][0-9])|(1[0-9]{2})|([0-9]{1,2})))\])|([A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])*(\.[A-Za-z]{2,})+))$/;
+  /^([A-Z0-9_+-]+\.?)*[A-Z0-9_+-]@([A-Z0-9][A-Z0-9\-]*\.)+[A-Z]{2,}$/i;
+// const emailRegex =
+//   /^[a-z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-z0-9-]+(?:\.[a-z0-9\-]+)*$/i;
+
 // from https://thekevinscott.com/emojis-in-javascript/#writing-a-regular-expression
 const emojiRegex = /^(\p{Extended_Pictographic}|\p{Emoji_Component})+$/u;
 
@@ -3431,6 +3445,12 @@ export class ZodMap<
   ZodMapDef<Key, Value>,
   Map<Key["_input"], Value["_input"]>
 > {
+  get keySchema() {
+    return this._def.keyType;
+  }
+  get valueSchema() {
+    return this._def.valueType;
+  }
   _parse(input: ParseInput): ParseReturnType<this["_output"]> {
     const { status, ctx } = this._processInputParams(input);
     if (ctx.parsedType !== ZodParsedType.map) {
@@ -3947,12 +3967,15 @@ function createZodEnum<U extends string, T extends [U, ...U[]]>(
   values: T,
   params?: RawCreateParams
 ): ZodEnum<T>;
-function createZodEnum(values: any, params?: RawCreateParams) {
+function createZodEnum(
+  values: [string, ...string[]],
+  params?: RawCreateParams
+) {
   return new ZodEnum({
-    values: values as any,
+    values,
     typeName: ZodFirstPartyTypeKind.ZodEnum,
     ...processCreateParams(params),
-  }) as any;
+  });
 }
 
 export class ZodEnum<T extends [string, ...string[]]> extends ZodType<
@@ -4172,7 +4195,10 @@ export class ZodPromise<T extends ZodTypeAny> extends ZodType<
 //////////////////////////////////////////////
 
 export type Refinement<T> = (arg: T, ctx: RefinementCtx) => any;
-export type SuperRefinement<T> = (arg: T, ctx: RefinementCtx) => void;
+export type SuperRefinement<T> = (
+  arg: T,
+  ctx: RefinementCtx
+) => void | Promise<void>;
 
 export type RefinementEffect<T> = {
   type: "refinement";
@@ -4184,7 +4210,7 @@ export type TransformEffect<T> = {
 };
 export type PreprocessEffect<T> = {
   type: "preprocess";
-  transform: (arg: T) => any;
+  transform: (arg: T, ctx: RefinementCtx) => any;
 };
 export type Effect<T> =
   | RefinementEffect<T>
@@ -4218,8 +4244,30 @@ export class ZodEffects<
 
     const effect = this._def.effect || null;
 
+    const checkCtx: RefinementCtx = {
+      addIssue: (arg: IssueData) => {
+        addIssueToContext(ctx, arg);
+        if (arg.fatal) {
+          status.abort();
+        } else {
+          status.dirty();
+        }
+      },
+      get path() {
+        return ctx.path;
+      },
+    };
+
+    checkCtx.addIssue = checkCtx.addIssue.bind(checkCtx);
+
     if (effect.type === "preprocess") {
-      const processed = effect.transform(ctx.data);
+      const processed = effect.transform(ctx.data, checkCtx);
+      if (ctx.common.issues.length) {
+        return {
+          status: "dirty",
+          value: ctx.data,
+        };
+      }
 
       if (ctx.common.async) {
         return Promise.resolve(processed).then((processed) => {
@@ -4237,22 +4285,6 @@ export class ZodEffects<
         });
       }
     }
-
-    const checkCtx: RefinementCtx = {
-      addIssue: (arg: IssueData) => {
-        addIssueToContext(ctx, arg);
-        if (arg.fatal) {
-          status.abort();
-        } else {
-          status.dirty();
-        }
-      },
-      get path() {
-        return ctx.path;
-      },
-    };
-
-    checkCtx.addIssue = checkCtx.addIssue.bind(checkCtx);
     if (effect.type === "refinement") {
       const executeRefinement = (
         acc: unknown
@@ -4344,7 +4376,7 @@ export class ZodEffects<
   };
 
   static createWithPreprocess = <I extends ZodTypeAny>(
-    preprocess: (arg: unknown) => unknown,
+    preprocess: (arg: unknown, ctx: RefinementCtx) => unknown,
     schema: I,
     params?: RawCreateParams
   ): ZodEffects<I, I["_output"], unknown> => {
@@ -4740,6 +4772,72 @@ export class ZodPipeline<
   }
 }
 
+///////////////////////////////////////////
+///////////////////////////////////////////
+//////////                       //////////
+//////////      ZodReadonly      //////////
+//////////                       //////////
+///////////////////////////////////////////
+///////////////////////////////////////////
+type BuiltIn =
+  | (((...args: any[]) => any) | (new (...args: any[]) => any))
+  | { readonly [Symbol.toStringTag]: string }
+  | Date
+  | Error
+  | Generator
+  | Promise<unknown>
+  | RegExp;
+
+type MakeReadonly<T> = T extends Map<infer K, infer V>
+  ? ReadonlyMap<K, V>
+  : T extends Set<infer V>
+  ? ReadonlySet<V>
+  : T extends [infer Head, ...infer Tail]
+  ? readonly [Head, ...Tail]
+  : T extends Array<infer V>
+  ? ReadonlyArray<V>
+  : T extends BuiltIn
+  ? T
+  : Readonly<T>;
+
+export interface ZodReadonlyDef<T extends ZodTypeAny = ZodTypeAny>
+  extends ZodTypeDef {
+  innerType: T;
+  typeName: ZodFirstPartyTypeKind.ZodReadonly;
+}
+
+export class ZodReadonly<T extends ZodTypeAny> extends ZodType<
+  MakeReadonly<T["_output"]>,
+  ZodReadonlyDef<T>,
+  T["_input"]
+> {
+  _parse(input: ParseInput): ParseReturnType<this["_output"]> {
+    const result = this._def.innerType._parse(input);
+    if (isValid(result)) {
+      result.value = Object.freeze(result.value);
+    }
+    return result;
+  }
+
+  static create = <T extends ZodTypeAny>(
+    type: T,
+    params?: RawCreateParams
+  ): ZodReadonly<T> => {
+    return new ZodReadonly({
+      innerType: type,
+      typeName: ZodFirstPartyTypeKind.ZodReadonly,
+      ...processCreateParams(params),
+    }) as any;
+  };
+}
+
+////////////////////////////////////////
+////////////////////////////////////////
+//////////                    //////////
+//////////      z.custom      //////////
+//////////                    //////////
+////////////////////////////////////////
+////////////////////////////////////////
 type CustomParams = CustomErrorParams & { fatal?: boolean };
 export const custom = <T>(
   check?: (data: unknown) => any,
@@ -4815,6 +4913,7 @@ export enum ZodFirstPartyTypeKind {
   ZodPromise = "ZodPromise",
   ZodBranded = "ZodBranded",
   ZodPipeline = "ZodPipeline",
+  ZodReadonly = "ZodReadonly",
 }
 export type ZodFirstPartySchemaTypes =
   | ZodString
@@ -4852,8 +4951,7 @@ export type ZodFirstPartySchemaTypes =
   | ZodBranded<any, any>
   | ZodPipeline<any, any>;
 
-// new approach that works for abstract classes
-// but requires TS 4.4+
+// requires TS 4.4+
 abstract class Class {
   constructor(..._: any[]) {}
 }
