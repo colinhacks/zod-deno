@@ -53,6 +53,7 @@
     - [Gold](#gold)
     - [Silver](#silver)
     - [Bronze](#bronze)
+    - [Copper](#copper)
   - [Ecosystem](#ecosystem)
     - [Resources](#resources)
     - [API libraries](#api-libraries)
@@ -322,6 +323,9 @@ Sponsorship at any level is appreciated and encouraged. For individual developer
     <td>Connor Sinnott</td>
     <td>Mohammad-Ali A'râbi</td>
     <td>Supatool</td>
+  </tr>
+  <tr>
+    <td>Social Crow</td>
   </tr>
 </table>
 
