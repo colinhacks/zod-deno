@@ -185,9 +185,9 @@ Some other great aspects:
 
 Sponsorship at any level is appreciated and encouraged. For individual developers, consider the [Cup of Coffee tier](https://github.com/sponsors/colinhacks). If you built a paid product using Zod, consider one of the [podium tiers](https://github.com/sponsors/colinhacks).
 
-#### Gold
+#### Platinum
 
-> This tier was just added. [Be the first Gold Sponsor!](https://github.com/sponsors/colinhacks/sponsorships?sponsor=colinhacks&tier_id=399648&preview=false)
+> [Email me](mailto:colin@colinhacks.com) to discuss sponsoring Zod at this level.
 
 <!-- <table>
   <tr>
@@ -203,7 +203,7 @@ Sponsorship at any level is appreciated and encouraged. For individual developer
   </tr>
 </table> -->
 
-#### Silver
+#### Gold
 
 <table>
   <tr>
@@ -283,21 +283,39 @@ Sponsorship at any level is appreciated and encouraged. For individual developer
   </tr>
 </table>
 
-#### Bronze
+#### Silver
 
 <table>
   <tr>
-    <td><a href="https://www.numeric.io">Numeric</a></td>
-    <td><a href="https://marcatopartners.com/">Marcato Partners</a></td>
-    <td><a href="https://interval.com">Interval</a></td>
-    <td><a href="https://seasoned.cc">Seasoned Software</a></td>
-  </tr>
-  <tr>
-    <td><a href="https://www.bamboocreative.nz/">Bamboo Creative</a></td>
+    <td align="center">
+      <a href="https://www.numeric.io">
+        <img src="https://i.imgur.com/kTiLtZt.png" height="40px;" alt="Numeric logo" />
+      </a>
+    </td>
+    <td>
+      <a href="https://marcatopartners.com">
+        <img src="https://avatars.githubusercontent.com/u/84106192?s=200&v=4" height="40px;" alt="Marcato Partners" />
+      </a>
+    </td>
+    <td>
+      <a href="https://interval.com">
+        <img src="https://avatars.githubusercontent.com/u/67802063?s=200&v=4" height="40px;" alt="" />
+      </a>
+    </td>
+    <td>
+      <a href="https://seasoned.cc">
+        <img src="https://avatars.githubusercontent.com/u/33913103?s=200&v=4" height="40px;" alt="" />
+      </a>
+    </td>
+    <td>
+      <a href="https://www.bamboocreative.nz/">
+        <img src="https://avatars.githubusercontent.com/u/41406870?v=4" height="40px;" alt="Bamboo Creative logo" />
+      </a>
+    </td>
   </tr>
 </table>
 
-#### Copper
+#### Bronze
 
 <table>
   <tr>
