@@ -9,12 +9,11 @@
 </p>
 <br/>
 <p align="center">
-<a href="https://github.com/colinhacks/zod/actions?query=branch%3Amaster"><img src="https://github.com/colinhacks/zod/actions/workflows/test.yml/badge.svg?event=push&branch=master" alt="Zod CI status" /></a>
+<a href="https://github.com/colinhacks/zod/actions?query=branch%3Amain"><img src="https://github.com/colinhacks/zod/actions/workflows/test.yml/badge.svg?event=push&branch=main" alt="Zod CI status" /></a>
 <a href="https://twitter.com/colinhacks" rel="nofollow"><img src="https://img.shields.io/badge/created%20by-@colinhacks-4BBAAB.svg" alt="Created by Colin McDonnell"></a>
 <a href="https://opensource.org/licenses/MIT" rel="nofollow"><img src="https://img.shields.io/github/license/colinhacks/zod" alt="License"></a>
 <a href="https://www.npmjs.com/package/zod" rel="nofollow"><img src="https://img.shields.io/npm/dw/zod.svg" alt="npm"></a>
 <a href="https://www.npmjs.com/package/zod" rel="nofollow"><img src="https://img.shields.io/github/stars/colinhacks/zod" alt="stars"></a>
-<a href="https://discord.gg/KaSRdyX2vc" rel="nofollow"><img src="https://img.shields.io/discord/893487829802418277?label=Discord&logo=discord&logoColor=white" alt="discord server"></a>
 </p>
 
 <div align="center">
@@ -37,11 +36,13 @@
 <br/>
 <br/>
 
-> Zod 3.23 is out! View the [release notes](https://github.com/colinhacks/zod/releases/tag/v3.23.0).
+<h4><strong>Announcement ✨</strong><br/>Zod has recieved the <a href="https://clerk.com">Clerk</a> OSS Fellowship!<br/>Read the announcement post 👉 <a href="https://zod.dev/blog/clerk-fellowship">zod.dev/blog/clerk-fellowship</a></h4>
 
-> These docs have been translated into [Chinese](./README_ZH.md).
+<br/>
 
 ## Table of contents
+
+> These docs have been translated into [Chinese](./README_ZH.md).
 
 <!-- The full documentation is available both on the [official documentation site](https://zod.js.org/) (recommended) and in `README.md`.
 
@@ -50,6 +51,7 @@
 - [Table of contents](#table-of-contents)
 - [Introduction](#introduction)
   - [Sponsors](#sponsors)
+    - [Platinum](#platinum)
     - [Gold](#gold)
     - [Silver](#silver)
     - [Bronze](#bronze)
@@ -181,13 +183,9 @@ Some other great aspects:
 - Functional approach: [parse, don't validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
 - Works with plain JavaScript too! You don't need to use TypeScript.
 
-### Sponsors
+## Sponsors
 
 Sponsorship at any level is appreciated and encouraged. For individual developers, consider the [Cup of Coffee tier](https://github.com/sponsors/colinhacks). If you built a paid product using Zod, consider one of the [podium tiers](https://github.com/sponsors/colinhacks).
-
-#### Platinum
-
-> [Email me](mailto:colin@colinhacks.com) to discuss sponsoring Zod at this level.
 
 <!-- <table>
   <tr>
@@ -203,121 +201,147 @@ Sponsorship at any level is appreciated and encouraged. For individual developer
   </tr>
 </table> -->
 
-#### Gold
+<h3 align="center">Platinum</h3>
 
-<table>
+<table align="center" style="justify-content: center;align-items: center;display: flex;">
   <tr>
     <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/80861386?s=200&v=4" height="45px;" alt="Cerbos" />
-      <br />
-      <a href="https://cerbos.dev/" target="_blank">Cerbos</a>
+      <img src="https://avatars.githubusercontent.com/u/91446104?s=200&v=4" height="100px;" alt="Speakeasy API" />
     </td>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/301879?s=200&v=4" height="45px;" alt="Scalar.com logo" />
-      <br />
-      <a href="https://scalar.com/" target="_blank">Scalar</a>
-    </td>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/91446104?s=200&v=4" height="45px;" alt="Speakeasy API" />
-      <br />
-      <a href="https://speakeasyapi.dev/" target="_blank">Speakeasy</a>
-    </td>
-    <td align="center">
-      <img src="https://avatars0.githubusercontent.com/u/15068039?s=200&v=4" height="45px;" alt="Deletype logo" />
-      <br />
-      <a href="https://deletype.com" target="_blank">Deletype</a>
-    </td>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/95297378?s=200&v=4" height="45px;" alt="Trigger.dev logo" />
-      <br />
-      <a href="https://trigger.dev" target="_blank">Trigger.dev</a>
-    </td>
-  </tr><tr>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/125754?s=200&v=4" height="45px;" alt="Transloadit logo" />
-      <br />
-      <a href="https://transloadit.com/?utm_source=zod&utm_medium=refe
-    rral&utm_campaign=sponsorship&utm_content=github" target="_blank">Transloadit</a>
-    </td>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/107880645?s=200&v=4" height="45px;" alt="Infisical logo" />
-      <br />
-      <a href="https://infisical.com" target="_blank">Infisical</a>
-    </td>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/91036480?s=200&v=4" height="45px;" alt="Whop logo" />
-      <br />
-      <a href="https://whop.com/" target="_blank">Whop</a>
-    </td>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/36402888?s=200&v=4" height="45px;" alt="CryptoJobsList logo" />
-      <br />
-      <a href="https://cryptojobslist.com/" target="_blank">CryptoJobsList</a>
-    </td>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/70170949?s=200&v=4" height="45px;" alt="Plain logo" />
-      <br />
-      <a href="https://plain.com/" target="_blank">Plain.</a>
-    </td>
-  </tr><tr>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/78935958?s=200&v=4" height="45px;" alt="Inngest logo" />
-      <br />
-      <a href="https://inngest.com/" target="_blank">Inngest</a>
-    </td>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/13880908?s=200&v=4" height="45px;" alt="Storyblok CMS" />
-      <br />
-      <a href="https://storyblok.com/" target="_blank">Storyblok</a>
-    </td>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/16199997?s=200&v=4" height="45px;" alt="Mux logo" />
-      <br />
-      <a href="https://mux.link/zod" target="_blank">Mux</a>
-    </td>
-    <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/180984?v=4" height="45px;" alt="@emreb" />
-      <br />
-      <a href="https://github.com/emreb" target="_blank"><code>@emreb</code></a>
+    <td>
+      <p>
+        <a style="text-decoration:none;" href="https://speakeasyapi.dev?utm_source=zod" target="_blank">Speakeasy</a>
+        <br/>
+        SDKs & Terraform Providers for Your API
+        <br>
+        (powered by Zod!)
+      </p>
     </td>
   </tr>
 </table>
 
-#### Silver
+<h3 align="center">Gold</h3>
 
-<table>
+<table align="center" style="justify-content: center;align-items: center;display: flex;">
   <tr>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/89474619?s=200&v=4" height="50px;" alt="PropelAuth" />
+      <br />
+      <a style="text-decoration:none;" href="https://www.propelauth.com/" target="_blank">PropelAuth</a>
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/80861386?s=200&v=4" height="50px;" alt="Cerbos" />
+      <br />
+      <a style="text-decoration:none;" href="https://cerbos.dev/" target="_blank">Cerbos</a>
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/301879?s=200&v=4" height="50px;" alt="Scalar.com logo" />
+      <br />
+      <a style="text-decoration:none;" href="https://scalar.com/" target="_blank">Scalar</a>
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/95297378?s=200&v=4" height="50px;" alt="Trigger.dev logo" />
+      <br />
+      <a style="text-decoration:none;" href="https://trigger.dev" target="_blank">Trigger.dev</a>
+    </td>
+    </tr><tr>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/125754?s=200&v=4" height="50px;" alt="Transloadit logo" />
+      <br />
+      <a style="text-decoration:none;" href="https://transloadit.com/?utm_source=zod&utm_medium=refe
+    rral&utm_campaign=sponsorship&utm_content=github" target="_blank">Transloadit</a>
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/107880645?s=200&v=4" height="50px;" alt="Infisical logo" />
+      <br />
+      <a style="text-decoration:none;" href="https://infisical.com" target="_blank">Infisical</a>
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/91036480?s=200&v=4" height="50px;" alt="Whop logo" />
+      <br />
+      <a style="text-decoration:none;" href="https://whop.com/" target="_blank">Whop</a>
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/36402888?s=200&v=4" height="50px;" alt="CryptoJobsList logo" />
+      <br />
+      <a style="text-decoration:none;" href="https://cryptojobslist.com/" target="_blank">CryptoJobsList</a>
+    </td>
+    </tr><tr>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/70170949?s=200&v=4" height="50px;" alt="Plain logo" />
+      <br />
+      <a style="text-decoration:none;" href="https://plain.com/" target="_blank">Plain.</a>
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/78935958?s=200&v=4" height="50px;" alt="Inngest logo" />
+      <br />
+      <a style="text-decoration:none;" href="https://inngest.com/" target="_blank">Inngest</a>
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/13880908?s=200&v=4" height="50px;" alt="Storyblok CMS" />
+      <br />
+      <a style="text-decoration:none;" href="https://storyblok.com/" target="_blank">Storyblok</a>
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/16199997?s=200&v=4" height="50px;" alt="Mux logo" />
+      <br />
+      <a style="text-decoration:none;" href="https://mux.link/zod" target="_blank">Mux</a>
+    </td>
+  </tr>
+</table>
+
+<h3 align="center">Silver</h3>
+
+<table align="center" style="justify-content: center;align-items: center;display: flex;">
+  <tr>
+    <td align="center">
+      <a href="https://encore.dev">
+        <img src="https://github.com/colinhacks/zod/assets/3084745/5ad94e73-cd34-4957-9979-37da85fcf9cd" height="40px;" alt="Encore.dev logo" />
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://www.replay.io/">
+        <img src="https://avatars.githubusercontent.com/u/60818315?s=200&v=4" height="40px;" alt="Replay.io logo" />
+      </a>
+    </td>
     <td align="center">
       <a href="https://www.numeric.io">
         <img src="https://i.imgur.com/kTiLtZt.png" height="40px;" alt="Numeric logo" />
       </a>
     </td>
-    <td>
+    <td align="center">
       <a href="https://marcatopartners.com">
         <img src="https://avatars.githubusercontent.com/u/84106192?s=200&v=4" height="40px;" alt="Marcato Partners" />
       </a>
     </td>
-    <td>
+  </tr>
+  <tr>
+    <td align="center">
       <a href="https://interval.com">
         <img src="https://avatars.githubusercontent.com/u/67802063?s=200&v=4" height="40px;" alt="" />
       </a>
     </td>
-    <td>
+    <td align="center">
       <a href="https://seasoned.cc">
         <img src="https://avatars.githubusercontent.com/u/33913103?s=200&v=4" height="40px;" alt="" />
       </a>
     </td>
-    <td>
+    <td align="center">
       <a href="https://www.bamboocreative.nz/">
         <img src="https://avatars.githubusercontent.com/u/41406870?v=4" height="40px;" alt="Bamboo Creative logo" />
+      </a>
+    </td>
+     <td align="center">
+     <a href="https://github.com/jasonLaster">
+        <img src="https://avatars.githubusercontent.com/u/254562?v=4" height="40px;" alt="Jason Laster" />
       </a>
     </td>
   </tr>
 </table>
 
-#### Bronze
+<h3 align="center">Bronze</h3>
 
-<table>
+<table align="center" style="justify-content: center;align-items: center;display: flex;">
   <tr>
     <td>Brandon Bayer</td>
     <td>Jiří Brabec</td>
@@ -341,9 +365,6 @@ Sponsorship at any level is appreciated and encouraged. For individual developer
     <td>Connor Sinnott</td>
     <td>Mohammad-Ali A'râbi</td>
     <td>Supatool</td>
-  </tr>
-  <tr>
-    <td>Social Crow</td>
   </tr>
 </table>
 
@@ -391,7 +412,7 @@ There are a growing number of tools that are built atop or support Zod natively!
 - [`zod-to-json-schema`](https://github.com/StefanTerdell/zod-to-json-schema): Convert your Zod schemas into [JSON Schemas](https://json-schema.org/).
 - [`@anatine/zod-openapi`](https://github.com/anatine/zod-plugins/tree/main/packages/zod-openapi): Converts a Zod schema to an OpenAPI v3.x `SchemaObject`.
 - [`zod-fast-check`](https://github.com/DavidTimms/zod-fast-check): Generate `fast-check` arbitraries from Zod schemas.
-- [`zod-dto`](https://github.com/kbkk/abitia/tree/master/packages/zod-dto): Generate Nest.js DTOs from a Zod schema.
+- [`zod-dto`](https://github.com/kbkk/abitia/tree/main/packages/zod-dto): Generate Nest.js DTOs from a Zod schema.
 - [`fastify-type-provider-zod`](https://github.com/turkerdev/fastify-type-provider-zod): Create Fastify type providers from Zod schemas.
 - [`zod-to-openapi`](https://github.com/asteasolutions/zod-to-openapi): Generate full OpenAPI (Swagger) docs from Zod, including schemas, endpoints & parameters.
 - [`nestjs-graphql-zod`](https://github.com/incetarik/nestjs-graphql-zod): Generates NestJS GraphQL model classes from Zod schemas. Provides GraphQL method decorators working with Zod schemas.
@@ -402,7 +423,7 @@ There are a growing number of tools that are built atop or support Zod natively!
 #### X to Zod
 
 - [`ts-to-zod`](https://github.com/fabien0102/ts-to-zod): Convert TypeScript definitions into Zod schemas.
-- [`@runtyping/zod`](https://github.com/johngeorgewright/runtyping/tree/master/packages/zod): Generate Zod from static types & JSON schema.
+- [`@runtyping/zod`](https://github.com/johngeorgewright/runtyping/tree/main/packages/zod): Generate Zod from static types & JSON schema.
 - [`json-schema-to-zod`](https://github.com/StefanTerdell/json-schema-to-zod): Convert your [JSON Schemas](https://json-schema.org/) into Zod schemas. [Live demo](https://StefanTerdell.github.io/json-schema-to-zod-react/).
 - [`json-to-zod`](https://github.com/rsinohara/json-to-zod): Convert JSON objects into Zod schemas. [Live demo](https://rsinohara.github.io/json-to-zod-react/).
 - [`graphql-codegen-typescript-validation-schema`](https://github.com/Code-Hex/graphql-codegen-typescript-validation-schema): GraphQL Code Generator plugin to generate form validation schema from your GraphQL schema.
@@ -415,6 +436,7 @@ There are a growing number of tools that are built atop or support Zod natively!
 - [`@sanity-typed/zod`](https://github.com/saiichihashimoto/sanity-typed/tree/main/packages/zod): Generate Zod Schemas from [Sanity Schemas](https://www.sanity.io/docs/schema-types).
 - [`java-to-zod`](https://github.com/ivangreene/java-to-zod): Convert POJOs to Zod schemas
 - [`Orval`](https://github.com/anymaniax/orval): Generate Zod schemas from OpenAPI schemas
+- [`Kubb`](https://github.com/kubb-labs/kubb): Generate SDKs and Zod schemas from your OpenAPI schemas
 
 #### Mocking
 
