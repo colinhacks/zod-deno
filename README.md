@@ -13,7 +13,7 @@
 <a href="https://twitter.com/colinhacks" rel="nofollow"><img src="https://img.shields.io/badge/created%20by-@colinhacks-4BBAAB.svg" alt="Created by Colin McDonnell"></a>
 <a href="https://opensource.org/licenses/MIT" rel="nofollow"><img src="https://img.shields.io/github/license/colinhacks/zod" alt="License"></a>
 <a href="https://www.npmjs.com/package/zod" rel="nofollow"><img src="https://img.shields.io/npm/dw/zod.svg" alt="npm"></a>
-<a href="https://www.npmjs.com/package/zod" rel="nofollow"><img src="https://img.shields.io/github/stars/colinhacks/zod" alt="stars"></a>
+<a href="https://github.com/colinhacks/zod" rel="nofollow"><img src="https://img.shields.io/github/stars/colinhacks/zod" alt="stars"></a>
 </p>
 
 <div align="center">
@@ -36,17 +36,15 @@
 <br/>
 <br/>
 
-<h4><strong>Announcement ✨</strong><br/>Zod has recieved the <a href="https://clerk.com">Clerk</a> OSS Fellowship!<br/>Read the announcement post 👉 <a href="https://zod.dev/blog/clerk-fellowship">zod.dev/blog/clerk-fellowship</a></h4>
+<!-- <p><strong>Announcement ✨</strong> Zod has recieved the <a href="https://go.clerk.com/zod-clerk">Clerk</a> OSS Fellowship!<br/>Read the announcement post 👉 <a href="https://go.clerk.com/zod-clerk">clerk.com/blog/zod-fellowship</a></p> -->
+
+[![clerk announcement](https://github.com/colinhacks/zod/assets/3084745/6327cf99-8d82-4b44-a5b1-ba2b5c2ff6ad)](https://go.clerk.com/hqN4rp7)
 
 <br/>
 
 ## Table of contents
 
 > These docs have been translated into [Chinese](./README_ZH.md).
-
-<!-- The full documentation is available both on the [official documentation site](https://zod.js.org/) (recommended) and in `README.md`.
-
-#### Go to [zod.js.org](https://zod.js.org) >> -->
 
 - [Table of contents](#table-of-contents)
 - [Introduction](#introduction)
@@ -67,8 +65,7 @@
     - [Utilities for Zod](#utilities-for-zod)
 - [Installation](#installation)
   - [Requirements](#requirements)
-  - [From `npm` (Node/Bun)](#from-npm-nodebun)
-  - [From `deno.land/x` (Deno)](#from-denolandx-deno)
+  - [From `npm`](#from-npm)
 - [Basic usage](#basic-usage)
 - [Primitives](#primitives)
 - [Coercion for primitives](#coercion-for-primitives)
@@ -78,11 +75,12 @@
   - [Dates](#dates)
   - [Times](#times)
   - [IP addresses](#ip-addresses)
+  - [IP ranges](#ip-ranges-cidr)
 - [Numbers](#numbers)
 - [BigInts](#bigints)
 - [NaNs](#nans)
 - [Booleans](#booleans)
-- [Dates](#dates)
+- [Dates](#dates-1)
 - [Zod enums](#zod-enums)
 - [Native enums](#native-enums)
 - [Optionals](#optionals)
@@ -185,40 +183,128 @@ Some other great aspects:
 
 ## Sponsors
 
-Sponsorship at any level is appreciated and encouraged. For individual developers, consider the [Cup of Coffee tier](https://github.com/sponsors/colinhacks). If you built a paid product using Zod, consider one of the [podium tiers](https://github.com/sponsors/colinhacks).
+Sponsorship at any level is appreciated and encouraged. If you built a paid product using Zod, consider one of the [corporate tiers](https://github.com/sponsors/colinhacks).
 
-<!-- <table>
-  <tr>
-    <td align="center">
-      <a href="https://www.example.com" target="_blank">
-        <img src="https://example.com/image.png" height="100px;" alt="XXX" />
-      </a>
-      <br />
-      <b>XXX</b>
-      <br />
-      <a href="https://www.example.com" target="_blank">example.com</a>
-    </td>
-  </tr>
-</table> -->
+<br/>
+<h3 align="center">Diamond</h3>
+
+<br/>
+
+<div align="center">
+  <a href="https://go.clerk.com/PKHrcwh">
+    <picture width="100%">
+      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/colinhacks/zod/assets/3084745/15c8c8be-189d-44ed-b3db-59bf2a21cbe3">
+      <img alt="clerk logo" src="https://github.com/colinhacks/zod/assets/3084745/15c8c8be-189d-44ed-b3db-59bf2a21cbe3">
+    </picture>
+  </a>
+  <br/>
+  <br/>
+  <p>
+    The most comprehensive User Management Platform
+    <br/>
+    <a style="text-decoration:none;" href="https://go.clerk.com/PKHrcwh" target="_blank">clerk.com</a>
+  </p>
+</div>
+
+<br/>
+<br/>
 
 <h3 align="center">Platinum</h3>
 
 <table align="center" style="justify-content: center;align-items: center;display: flex;">
   <tr>
     <td align="center">
-      <img src="https://avatars.githubusercontent.com/u/91446104?s=200&v=4" height="100px;" alt="Speakeasy API" />
-    </td>
-    <td>
+      <p></p>
       <p>
-        <a style="text-decoration:none;" href="https://speakeasyapi.dev?utm_source=zod" target="_blank">Speakeasy</a>
-        <br/>
-        SDKs & Terraform Providers for Your API
-        <br>
-        (powered by Zod!)
+      <a href="https://liblab.com/?utm_source=zod">
+        <picture height="62px">
+          <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/34dfa1a2-ce94-46f4-8902-fbfac3e1a9bc">
+          <img alt="LibLab" height="62px" src="https://github.com/user-attachments/assets/3de0b617-5137-49c4-b72d-a033cbe602d8">
+        </picture>
+      </a>
+      <br  />   
+      Generate better SDKs for your APIs
+      <br/>
+      <a href="https://liblab.com/?utm_source=zod" style="text-decoration:none;">liblab.com</a>
       </p>
+      <p></p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <p></p>
+      <p>
+      <a href="https://neon.tech">
+        <picture height="68px">
+          <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/83b4b1b1-a9ab-4ae5-a632-56d282f0c444">
+          <img alt="Neon" height="68px" src="https://github.com/user-attachments/assets/b5799fc8-81ff-4053-a1c3-b29adf85e7a1">
+        </picture>
+      </a>
+      <br  />   
+      Serverless Postgres — Ship faster
+      <br/>
+      <a href="https://neon.tech" style="text-decoration:none;">neon.tech</a>
+      </p>
+      <p></p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <p></p>
+      <p>
+      <a href="https://retool.com/?utm_source=github&utm_medium=referral&utm_campaign=zod">
+        <picture height="45px">
+          <source media="(prefers-color-scheme: dark)" srcset="https://github.com/colinhacks/zod/assets/3084745/ac65013f-aeb4-48dd-a2ee-41040b69cbe6">
+          <img alt="stainless" height="45px" src="https://github.com/colinhacks/zod/assets/3084745/5ef4c11b-efeb-4495-90a8-41b83f798600">
+        </picture>
+      </a>
+      <br  />   
+      Build AI apps and workflows with <a href="https://retool.com/products/ai?utm_source=github&utm_medium=referral&utm_campaign=zod">Retool AI</a>
+      <br/>
+      <a href="https://retool.com/?utm_source=github&utm_medium=referral&utm_campaign=zod" style="text-decoration:none;">retool.com</a>
+      </p>
+      <p></p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <p></p>
+      <p>
+      <a href="https://stainlessapi.com">
+        <picture height="45px">
+          <source media="(prefers-color-scheme: dark)" srcset="https://github.com/colinhacks/zod/assets/3084745/f20759c1-3e51-49d0-a31e-bbc43abec665">
+          <img alt="stainless" height="45px" src="https://github.com/colinhacks/zod/assets/3084745/e9444e44-d991-4bba-a697-dbcfad608e47">
+        </picture>
+      </a>
+      <br  />   
+      Generate best-in-class SDKs
+      <br/>
+      <a href="https://stainlessapi.com" style="text-decoration:none;">stainlessapi.com</a>
+      </p>
+      <p></p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <p></p>
+      <p>
+      <a href="https://speakeasy.com/?utm_source=zod+docs">
+        <picture height="40px">
+          <source media="(prefers-color-scheme: dark)" srcset="https://github.com/colinhacks/zod/assets/3084745/b1d86601-c7fb-483c-9927-5dc24ce8b737">
+          <img alt="speakeasy" height="40px" src="https://github.com/colinhacks/zod/assets/3084745/647524a4-22bb-4199-be70-404207a5a2b5">
+        </picture>
+      </a>
+      <br  />   
+      SDKs & Terraform providers for your API
+      <br/>
+      <a href="https://speakeasy.com/?utm_source=zod+docs" style="text-decoration:none;">speakeasy.com</a>
+      </p>
+      <p></p>
     </td>
   </tr>
 </table>
+
+<br/>
 
 <h3 align="center">Gold</h3>
 
@@ -290,10 +376,25 @@ Sponsorship at any level is appreciated and encouraged. For individual developer
   </tr>
 </table>
 
+<br/>
+
 <h3 align="center">Silver</h3>
 
 <table align="center" style="justify-content: center;align-items: center;display: flex;">
   <tr>
+    <td align="center">
+      <a href="https://www.val.town/">
+        <picture width="100%" height="40px">
+          <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/36961d2e-d92e-42af-9031-a41885ece5f4">
+          <img alt="val town logo" src="https://github.com/user-attachments/assets/95305fc4-4da6-4bf8-aea4-bae8f5893e5d" height="40px">
+        </picture>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://www.route4me.com/">
+        <img src="https://avatars.githubusercontent.com/u/7936820?s=200&v=4" height="40px;" alt="route4me logo" />
+      </a>
+    </td>
     <td align="center">
       <a href="https://encore.dev">
         <img src="https://github.com/colinhacks/zod/assets/3084745/5ad94e73-cd34-4957-9979-37da85fcf9cd" height="40px;" alt="Encore.dev logo" />
@@ -304,6 +405,8 @@ Sponsorship at any level is appreciated and encouraged. For individual developer
         <img src="https://avatars.githubusercontent.com/u/60818315?s=200&v=4" height="40px;" alt="Replay.io logo" />
       </a>
     </td>
+  </tr>
+  <tr>
     <td align="center">
       <a href="https://www.numeric.io">
         <img src="https://i.imgur.com/kTiLtZt.png" height="40px;" alt="Numeric logo" />
@@ -314,8 +417,6 @@ Sponsorship at any level is appreciated and encouraged. For individual developer
         <img src="https://avatars.githubusercontent.com/u/84106192?s=200&v=4" height="40px;" alt="Marcato Partners" />
       </a>
     </td>
-  </tr>
-  <tr>
     <td align="center">
       <a href="https://interval.com">
         <img src="https://avatars.githubusercontent.com/u/67802063?s=200&v=4" height="40px;" alt="" />
@@ -326,13 +427,15 @@ Sponsorship at any level is appreciated and encouraged. For individual developer
         <img src="https://avatars.githubusercontent.com/u/33913103?s=200&v=4" height="40px;" alt="" />
       </a>
     </td>
+  </tr>
+  <tr>
     <td align="center">
       <a href="https://www.bamboocreative.nz/">
         <img src="https://avatars.githubusercontent.com/u/41406870?v=4" height="40px;" alt="Bamboo Creative logo" />
       </a>
     </td>
-     <td align="center">
-     <a href="https://github.com/jasonLaster">
+    <td align="center">
+      <a href="https://github.com/jasonLaster">
         <img src="https://avatars.githubusercontent.com/u/254562?v=4" height="40px;" alt="Jason Laster" />
       </a>
     </td>
@@ -388,6 +491,8 @@ There are a growing number of tools that are built atop or support Zod natively!
 - [`express-zod-api`](https://github.com/RobinTail/express-zod-api): Build Express-based APIs with I/O schema validation and custom middlewares.
 - [`tapiduck`](https://github.com/sumukhbarve/monoduck/blob/main/src/tapiduck/README.md): End-to-end typesafe JSON APIs with Zod and Express; a bit like tRPC, but simpler.
 - [`koa-zod-router`](https://github.com/JakeFenley/koa-zod-router): Create typesafe routes in Koa with I/O validation using Zod.
+- [`zod-sockets`](https://github.com/RobinTail/zod-sockets): Zod-powered Socket.IO microframework with I/O validation and built-in AsyncAPI specs
+- [`oas-tszod-gen`](https://github.com/inkognitro/oas-tszod-gen): Client SDK code generator to convert OpenApi v3 specifications into TS endpoint caller functions with Zod types.
 
 #### Form integrations
 
@@ -405,6 +510,8 @@ There are a growing number of tools that are built atop or support Zod natively!
 - [`sveltekit-superforms`](https://github.com/ciscoheat/sveltekit-superforms): Supercharged form library for SvelteKit with Zod validation.
 - [`mobx-zod-form`](https://github.com/MonoidDev/mobx-zod-form): Data-first form builder based on MobX & Zod.
 - [`@vee-validate/zod`](https://github.com/logaretm/vee-validate/tree/main/packages/zod): Form library for Vue.js with Zod schema validation.
+- [`zod-form-renderer`](https://github.com/thepeaklab/zod-form-renderer): Auto-infer form fields from zod schema and render them with react-hook-form with E2E type safety.
+- [`antd-zod`](https://github.com/MrBr/antd-zod): Zod adapter for Ant Design form fields validation.
 
 #### Zod to X
 
@@ -419,6 +526,7 @@ There are a growing number of tools that are built atop or support Zod natively!
 - [`zod-openapi`](https://github.com/samchungy/zod-openapi): Create full OpenAPI v3.x documentation from Zod schemas.
 - [`fastify-zod-openapi`](https://github.com/samchungy/fastify-zod-openapi): Fastify type provider, validation, serialization and @fastify/swagger support for Zod schemas.
 - [`typeschema`](https://typeschema.com/): Universal adapter for schema validation.
+- [`zodex`](https://github.com/commonbaseapp/zodex): (De)serialization for zod schemas
 
 #### X to Zod
 
@@ -430,6 +538,7 @@ There are a growing number of tools that are built atop or support Zod natively!
 - [`zod-prisma`](https://github.com/CarterGrimmeisen/zod-prisma): Generate Zod schemas from your Prisma schema.
 - [`Supervillain`](https://github.com/Southclaws/supervillain): Generate Zod schemas from your Go structs.
 - [`prisma-zod-generator`](https://github.com/omar-dulaimi/prisma-zod-generator): Emit Zod schemas from your Prisma schema.
+- [`drizzle-zod`](https://orm.drizzle.team/docs/zod): Emit Zod schemas from your Drizzle schema.
 - [`prisma-trpc-generator`](https://github.com/omar-dulaimi/prisma-trpc-generator): Emit fully implemented tRPC routers and their validation schemas using Zod.
 - [`zod-prisma-types`](https://github.com/chrishoermann/zod-prisma-types) Create Zod types from your Prisma models.
 - [`quicktype`](https://app.quicktype.io/): Convert JSON objects and JSON schemas into Zod schemas.
@@ -445,16 +554,19 @@ There are a growing number of tools that are built atop or support Zod natively!
 - [`zod-fixture`](https://github.com/timdeschryver/zod-fixture): Use your zod schemas to automate the generation of non-relevant test fixtures in a deterministic way.
 - [`zocker`](https://zocker.sigrist.dev): Generate plausible mock-data from your schemas.
 - [`zodock`](https://github.com/ItMaga/zodock) Generate mock data based on Zod schemas.
+- [`zod-schema-faker`](https://github.com/soc221b/zod-schema-faker) Generates mock data from Zod schemas. Powered by [@faker-js/faker](https://github.com/faker-js/faker) and [randexp.js](https://github.com/fent/randexp.js)
 
 #### Powered by Zod
 
 - [`freerstore`](https://github.com/JacobWeisenburger/freerstore): Firestore cost optimizer.
 - [`slonik`](https://github.com/gajus/slonik/tree/gajus/add-zod-validation-backwards-compatible#runtime-validation-and-static-type-inference): Node.js Postgres client with strong Zod integration.
+- [`schemql`](https://github.com/a2lix/schemql): Enhances your SQL workflow by combining raw SQL with targeted type safety and schema validation.
 - [`soly`](https://github.com/mdbetancourt/soly): Create CLI applications with zod.
 - [`pastel`](https://github.com/vadimdemedes/pastel): Create CLI applications with react, zod, and ink.
 - [`zod-xlsx`](https://github.com/sidwebworks/zod-xlsx): A xlsx based resource validator using Zod schemas.
 - [`znv`](https://github.com/lostfictions/znv): Type-safe environment parsing and validation for Node.js with Zod schemas.
 - [`zod-config`](https://github.com/alexmarqs/zod-config): Load configurations across multiple sources with flexible adapters, ensuring type safety with Zod.
+- [`unplugin-environment`](https://github.com/r17x/js/tree/main/packages/unplugin-environment#readme): A plugin for loading enviroment variables safely with schema validation, simple with virtual module, type-safe with intellisense, and better DX 🔥 🚀 👷. Powered by Zod.
 
 #### Utilities for Zod
 
@@ -482,10 +594,11 @@ There are a growing number of tools that are built atop or support Zod natively!
   }
   ```
 
-### From `npm` (Node/Bun)
+### From `npm`
 
 ```sh
 npm install zod       # npm
+deno add npm:zod      # deno
 yarn add zod          # yarn
 bun add zod           # bun
 pnpm add zod          # pnpm
@@ -495,23 +608,10 @@ Zod also publishes a canary version on every commit. To install the canary:
 
 ```sh
 npm install zod@canary       # npm
+deno add npm:zod@canary      # deno
 yarn add zod@canary          # yarn
 bun add zod@canary           # bun
 pnpm add zod@canary          # pnpm
-```
-
-### From `deno.land/x` (Deno)
-
-Unlike Node, Deno relies on direct URL imports instead of a package manager like NPM. Zod is available on [deno.land/x](https://deno.land/x). The latest version can be imported like so:
-
-```ts
-import { z } from "https://deno.land/x/zod/mod.ts";
-```
-
-You can also specify a particular version:
-
-```ts
-import { z } from "https://deno.land/x/zod@v3.16.1/mod.ts";
 ```
 
 > The rest of this README assumes you are using npm and importing directly from the `"zod"` package.
@@ -677,6 +777,7 @@ z.string().startsWith(string);
 z.string().endsWith(string);
 z.string().datetime(); // ISO 8601; by default only `Z` timezone allowed
 z.string().ip(); // defaults to allow both IPv4 and IPv6
+z.string().cidr(); // defaults to allow both IPv4 and IPv6
 
 // transforms
 z.string().trim(); // trim whitespace
@@ -718,6 +819,7 @@ z.string().datetime({ message: "Invalid datetime string! Must be UTC." });
 z.string().date({ message: "Invalid date string!" });
 z.string().time({ message: "Invalid time string!" });
 z.string().ip({ message: "Invalid IP address" });
+z.string().cidr({ message: "Invalid CIDR" });
 ```
 
 ### Datetimes
@@ -745,6 +847,13 @@ datetime.parse("2020-01-01T00:00:00.123+02:00"); // pass (millis optional)
 datetime.parse("2020-01-01T00:00:00.123+0200"); // pass (millis optional)
 datetime.parse("2020-01-01T00:00:00.123+02"); // pass (only offset hours)
 datetime.parse("2020-01-01T00:00:00Z"); // pass (Z still supported)
+```
+
+Allow unqualified (timezone-less) datetimes with the `local` flag.
+
+```ts
+const schema = z.string().datetime({ local: true });
+schema.parse("2020-01-01T00:00:00"); // pass
 ```
 
 You can additionally constrain the allowable `precision`. By default, arbitrary sub-second precision is supported (but optional).
@@ -800,7 +909,7 @@ time.parse("00:00:00"); // fail
 
 ### IP addresses
 
-The `z.string().ip()` method by default validate IPv4 and IPv6.
+By default `.ip()` allows both IPv4 and IPv6.
 
 ```ts
 const ip = z.string().ip();
@@ -821,6 +930,26 @@ ipv4.parse("84d5:51a0:9114:1855:4cfa:f2d7:1f12:7003"); // fail
 
 const ipv6 = z.string().ip({ version: "v6" });
 ipv6.parse("192.168.1.1"); // fail
+```
+
+### IP ranges (CIDR)
+
+Validate IP address ranges specified with [CIDR notation](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing). By default, `.cidr()` allows both IPv4 and IPv6.
+
+```ts
+const cidr = z.string().cidr();
+cidr.parse("192.168.0.0/24"); // pass
+cidr.parse("2001:db8::/32"); // pass
+```
+
+You can specify a version with the `version` parameter.
+
+```ts
+const ipv4Cidr = z.string().cidr({ version: "v4" });
+ipv4Cidr.parse("84d5:51a0:9114:1855:4cfa:f2d7:1f12:7003"); // fail
+
+const ipv6Cidr = z.string().cidr({ version: "v6" });
+ipv6Cidr.parse("192.168.1.1"); // fail
 ```
 
 ## Numbers
