@@ -105,6 +105,7 @@ export type StringValidation =
   | "ip"
   | "cidr"
   | "base64"
+  | "jwt"
   | "base64url"
   | { includes: string; position?: number }
   | { startsWith: string }
@@ -279,10 +280,10 @@ export class ZodError<T = any> extends Error {
     }
   }
 
-  toString() {
+  override toString() {
     return this.message;
   }
-  get message() {
+  override get message() {
     return JSON.stringify(this.issues, util.jsonStringifyReplacer, 2);
   }
 
