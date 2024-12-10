@@ -170,8 +170,7 @@ export abstract class ZodType<
   Output = any,
   Def extends ZodTypeDef = ZodTypeDef,
   Input = Output
-> implements StandardSchemaV1<Input, Output>
-{
+> {
   readonly _type!: Output;
   readonly _output!: Output;
   readonly _input!: Input;
@@ -1133,7 +1132,10 @@ export class ZodString extends ZodType<string, ZodStringDef, string> {
   }
   base64url(message?: errorUtil.ErrMessage) {
     // base64url encoding is a modification of base64 that can safely be used in URLs and filenames
-    return this._addCheck({ kind: "base64url", ...errorUtil.errToObj(message) });
+    return this._addCheck({
+      kind: "base64url",
+      ...errorUtil.errToObj(message),
+    });
   }
 
   jwt(options?: { alg?: string; message?: string }) {
@@ -1267,8 +1269,7 @@ export class ZodString extends ZodType<string, ZodStringDef, string> {
   }
 
   /**
-   * @deprecated Use z.string().min(1) instead.
-   * @see {@link ZodString.min}
+   * Equivalent to `.min(1)`
    */
   nonempty(message?: errorUtil.ErrMessage) {
     return this.min(1, errorUtil.errToObj(message));
