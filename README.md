@@ -37,13 +37,13 @@
 <br/>
 <br/>
 
-<h2 align="center">Featured sponsor: Fern</h2>
+<h2 align="center">Featured sponsor: Stainless</h2>
 
 <div align="center">
-  <a href="https://link.buildwithfern.com/zod-partnership">
+  <a href="https://www.stainless.com/?utm_source=zod">
     <picture width="95%" >
-      <source media="(prefers-color-scheme: dark)" srcset="https://i.imgur.com/ntvK08h.png">
-      <img alt="fern logo" src="https://i.imgur.com/pqyEkg5.png" width="95%">
+      <source media="(prefers-color-scheme: dark)" srcset="https://i.imgur.com/bjyoaHY.jpeg">
+      <img alt="stainless logo" src="https://i.imgur.com/bjyoaHY.jpeg" width="95%">
     </picture>
   </a>
   <br/>
@@ -409,6 +409,11 @@ Sponsorship at any level is appreciated and encouraged. If you built a paid prod
       <img src="https://avatars.githubusercontent.com/u/16199997?s=200&v=4" height="50px;" alt="Mux logo" />
       <br />
       <a style="text-decoration:none;" href="https://mux.link/zod" target="_blank">Mux</a>
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/76428554?s=200&v=4" height="50px;" alt="Cybozu logo" />
+      <br />
+      <a style="text-decoration:none;" href="https://cybozu.co.jp/index.html" target="_blank">Cybozu</a>
     </td>
   </tr>
 </table>
